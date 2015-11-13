@@ -17,4 +17,7 @@
 
     <!-- For dynamic default font styles -->
     <java-symbol type="string" name="config_bodyFontFamily" />
+
+    <!-- Vendor mismatch fingerprint warning -->
+    <java-symbol type="string" name="system_error_vendorprint" />
 </resources>
