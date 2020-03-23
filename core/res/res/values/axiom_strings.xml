@@ -41,8 +41,10 @@
     <string name="alert_slider_state_path"></string>
     <string name="alert_slider_uevent_match_path"></string>
 
-        <!-- Alert slide extras -->
+    <!-- Alert slide extras -->
     <string name="volume_ringer_priority_only">Priority</string>
     <string name="volume_ringer_alarms_only">Alarms</string>
+    <string name="volume_ringer_dnd">DnD</string>
+    <string name="tristate_flashlight">Torch</string>
 
 </resources>
