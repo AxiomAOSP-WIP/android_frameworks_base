@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2021 The Android Open Source Project
+<!--
+     Copyright (C) 2016-2022 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,14 +14,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<<<<<<< HEAD:core/res/res/color/surface_header_dark_sysui.xml
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/system_neutral1_500" android:lStar="5" />
-</selector>
-=======
 <resources>
-    <color name="accent_device_default_light">@*android:color/system_accent1_600</color>
-    
-    <color name="reticker_background_color">@android:color/system_neutral1_50</color>
+    <color name="reticker_background_color">@android:color/system_neutral1_900</color>
 </resources>
->>>>>>> 0f354671d100 (Feature: reticker [1/2]):packages/SystemUI/res/values/rice_colors.xml
