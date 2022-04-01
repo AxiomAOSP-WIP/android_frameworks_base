@@ -4727,6 +4727,9 @@ public class NotificationPanelViewController extends PanelViewController {
                 mView.setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
             }
             mNotificationStackScrollLayoutController.setMaxTopPadding(mQsMaxExpansionHeight);
+            float qsExpansionFraction = computeQsExpansionFraction();
+            int qsPanelBottomY = calculateQsBottomPosition(qsExpansionFraction);
+            mScrimController.setQsPosition(qsExpansionFraction, qsPanelBottomY);
         }
     }
 

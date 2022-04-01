@@ -134,6 +134,7 @@ public class QSPanelController extends QSPanelControllerBase<QSPanel> {
         }
         mView.addOnConfigurationChangedListener(mOnConfigurationChangedListener);
         switchTileLayout(true);
+        mView.updateColumns();
         mBrightnessMirrorHandler.onQsPanelAttached();
 
         ((PagedTileLayout) mView.getOrCreateTileLayout())
@@ -152,6 +153,21 @@ public class QSPanelController extends QSPanelControllerBase<QSPanel> {
         mView.removeOnConfigurationChangedListener(mOnConfigurationChangedListener);
         mBrightnessMirrorHandler.onQsPanelDettached();
         super.onViewDetached();
+    }
+
+    @Override
+    protected void onConfigurationChanged() {
+        mView.updateResources();
+        mView.updateColumns();
+        if (mView.isListening()) {
+            refreshAllTiles();
+        }
+    }
+
+    private void updateBrightnessMirror() {
+        if (mBrightnessMirrorController != null) {
+            mBrightnessSliderController.setMirrorControllerAndMirror(mBrightnessMirrorController);
+        }
     }
 
     /** */
@@ -256,4 +272,3 @@ public class QSPanelController extends QSPanelControllerBase<QSPanel> {
         return mStatusBarKeyguardViewManager.isBouncerInTransit();
     }
 }
-
