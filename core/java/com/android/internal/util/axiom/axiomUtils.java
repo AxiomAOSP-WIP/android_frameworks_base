@@ -194,7 +194,6 @@ public class axiomUtils {
         private static boolean mLocationState;
         private static boolean mCellularState;
         private static boolean mBluetoothState;
-        private static boolean mSensorState;
         private static int mRingerState;
         private static int mZenState;
 
@@ -408,7 +407,6 @@ public class axiomUtils {
             final boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
             if (disableSensors) {
-                mSensorState = isSensorEnabled();
                 setSensorEnabled(false);
             }
 
@@ -468,8 +466,14 @@ public class axiomUtils {
             // Enable Sensors
             final boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-            if (disableSensors && mSensorState != isSensorEnabled()) {
-                setSensorEnabled(mSensorState);
+            if (disableSensors) {
+                setSensorEnabled(true);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+                if (!isSensorEnabled()) {
+                    setSensorEnabled(true);
+                }
             }
 
             // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
