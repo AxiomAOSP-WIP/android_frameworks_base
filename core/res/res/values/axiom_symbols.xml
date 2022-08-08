@@ -17,4 +17,7 @@
 
     <!-- For dynamic default font styles -->
     <java-symbol type="string" name="config_bodyFontFamily" />
+
+     <!-- Button that opens the screen with details of an application error -->
+    <java-symbol type="string" name="aerr_show_details" /
 </resources>
