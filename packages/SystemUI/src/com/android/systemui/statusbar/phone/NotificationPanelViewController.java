@@ -216,6 +216,9 @@ import java.util.function.Consumer;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import com.android.systemui.tuner.TunerService;
+
+
 @CentralSurfacesComponent.CentralSurfacesScope
 public class NotificationPanelViewController extends PanelViewController {
 
@@ -673,6 +676,19 @@ public class NotificationPanelViewController extends PanelViewController {
 
     private final NPVCDownEventState.Buffer mLastDownEvents;
 
+    private final String[] mAppExceptions;
+
+    /*Reticker*/
+    private LinearLayout mReTickerComeback;
+    private ImageView mReTickerComebackIcon;
+    private TextView mReTickerContentTV;
+    private NotificationStackScrollLayout mNotificationStackScroller;
+    private boolean mReTickerStatus;
+    private boolean mReTickerColored;
+
+    private final TunerService mTunerService;
+
+
     private View.AccessibilityDelegate mAccessibilityDelegate = new View.AccessibilityDelegate() {
         @Override
         public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
@@ -776,6 +792,7 @@ public class NotificationPanelViewController extends PanelViewController {
             NotificationStackSizeCalculator notificationStackSizeCalculator,
             UnlockedScreenOffAnimationController unlockedScreenOffAnimationController,
             ShadeTransitionController shadeTransitionController,
+            TunerService tunerService,
             SystemClock systemClock) {
         super(view,
                 falsingManager,
@@ -795,6 +812,7 @@ public class NotificationPanelViewController extends PanelViewController {
                 keyguardUnlockAnimationController,
                 systemClock);
         mView = view;
+        mTunerService = tunerService;
         mVibratorHelper = vibratorHelper;
         mKeyguardMediaController = keyguardMediaController;
         mPrivacyDotViewController = privacyDotViewController;
@@ -4914,7 +4932,7 @@ public class NotificationPanelViewController extends PanelViewController {
         positionClockAndNotifications(true /* forceUpdate */);
     }
 
-    private class OnAttachStateChangeListener implements View.OnAttachStateChangeListener {
+    private class OnAttachStateChangeListener implements View.OnAttachStateChangeListener, TunerService.Tunable {
         @Override
         public void onViewAttachedToWindow(View v) {
             mFragmentService.getFragmentHostManager(mView)
