@@ -311,6 +311,10 @@ public class LocationManagerService extends ILocationManager.Stub implements
 
     @Nullable
     LocationProviderManager getLocationProviderManager(String providerName) {
+        return getLocationProviderManager(providerName, false /* ignorePassive */);
+    }
+
+    private LocationProviderManager getLocationProviderManager(final String providerName, final boolean ignorePassive) {
         if (providerName == null) {
             return null;
         }
