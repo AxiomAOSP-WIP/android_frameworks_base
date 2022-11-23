@@ -54,14 +54,9 @@ import com.android.systemui.qs.tiles.QuickAccessWalletTile;
 import com.android.systemui.qs.tiles.ReduceBrightColorsTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
-<<<<<<< HEAD
-=======
-import com.android.systemui.qs.tiles.SmartPixelsTile;
+
 import com.android.systemui.qs.tiles.SleepModeTile;
-import com.android.systemui.qs.tiles.SoundSearchTile;
-import com.android.systemui.qs.tiles.SoundTile;
-import com.android.systemui.qs.tiles.SyncTile;
->>>>>>> b36764ba1b97 (base: Introduce automated Sleep Mode [1/2])
+
 import com.android.systemui.qs.tiles.UiModeNightTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -107,26 +102,8 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<QRCodeScannerTile> mQRCodeScannerTileProvider;
     private final Provider<OneHandedModeTile> mOneHandedModeTileProvider;
     private final Provider<CaffeineTile> mCaffeineTileProvider;
-<<<<<<< HEAD
-=======
-    private final Provider<HeadsUpTile> mHeadsUpTileProvider;
-    private final Provider<ReadingModeTile> mReadingModeTileProvider;
-    private final Provider<SyncTile> mSyncTileProvider;
-    private final Provider<PowerShareTile> mPowerShareTileProvider;
-    private final Provider<ProfilesTile> mProfilesTileProvider;
-    private final Provider<UsbTetherTile> mUsbTetherTileProvider;
-    private final Provider<VpnTile> mVpnTileProvider;
-    private final Provider<RefreshRateTile> mRefreshRateTileProvider;
-    private final Provider<CPUInfoTile> mCPUInfoTileProvider;
-    private final Provider<FPSInfoTile> mFPSInfoTileProvider;
-    private final Provider<CompassTile> mCompassTileProvider;
-    private final Provider<DataSwitchTile> mDataSwitchTileProvider;
-    private final Provider<SmartPixelsTile> mSmartPixelsTileProvider;;
-    private final Provider<SoundSearchTile> mSoundSearchTileProvider;
-    private final Provider<SoundTile> mSoundTileProvider;
-    private final Provider<PreferredNetworkTile> mPreferredNetworkTileProvider;
+
     private final Provider<SleepModeTile> mSleepModeTileProvider;
->>>>>>> b36764ba1b97 (base: Introduce automated Sleep Mode [1/2])
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;

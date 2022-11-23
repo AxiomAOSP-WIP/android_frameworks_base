@@ -65,6 +65,9 @@ import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.RemoteException;
+import android.os.ServiceManager;
+
 public class axiomUtils {
 
     public static boolean isPackageInstalled(Context context, String packageName, boolean ignoreState) {
@@ -128,12 +131,12 @@ public class axiomUtils {
         }
         return needsNav;
     }
-    
+
 
    public static void showSettingsRestartDialog(Context context) {
         new AlertDialog.Builder(context)
-                .setTitle(R.string.settings_restart_title)
-                .setMessage(R.string.settings_restart_message)
+                .setTitle("Restart ?")
+                .setMessage("Restart Y/N ?")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         restartSettings(context);
