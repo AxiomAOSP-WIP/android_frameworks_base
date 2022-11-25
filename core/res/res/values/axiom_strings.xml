@@ -45,6 +45,12 @@
     <string name="sleep_mode_disabled_toast">Sleep mode turned off</string>
 
     <!-- Settings Restart -->
-	<string name="settings_restart_title">Settings restart required</string>
-	<string name="settings_restart_message">For all changes to take effect, a Settings restart is required. Incase assests were not updated, you may need to manually Restart the Settings app, Soft Restart Settings now?</string>
+	   <string name="settings_restart_title">Settings restart required</string>
+	   <string name="settings_restart_message">For all changes to take effect, a Settings restart is required. Incase assests were not updated, you may need to manually Restart the Settings app, Soft Restart Settings now?</string>
+
+     <!-- Smart Charging Mode -->
+     <string name="notification_channel_smart_charge">Smart Charging</string>
+     <string name="smart_charge_mode_notification_title">Smart Charging Notify</string>
+     <string name="smart_charge_notification_content">Frequently charging the battery above 80% shortens its life. Unplug the charger.</string>
+
 </resources>

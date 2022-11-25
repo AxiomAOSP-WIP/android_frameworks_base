@@ -69,6 +69,7 @@ public class SystemNotificationChannels {
     public static String ACCESSIBILITY_SECURITY_POLICY = "ACCESSIBILITY_SECURITY_POLICY";
     public static String ABUSIVE_BACKGROUND_APPS = "ABUSIVE_BACKGROUND_APPS";
     public static String SLEEP = "SLEEP";
+    public static String SMART_CHARGE = "SMART_CHARGE";
 
     public static void createAll(Context context) {
         final NotificationManager nm = context.getSystemService(NotificationManager.class);
@@ -212,6 +213,11 @@ public class SystemNotificationChannels {
                 context.getString(R.string.notification_channel_sleep),
                 NotificationManager.IMPORTANCE_LOW);
         channelsList.add(sleepModeChanges);
+
+        NotificationChannel smartChargingModeAlert = new NotificationChannel(SMART_CHARGE,
+                context.getString(R.string.notification_channel_smart_charge),
+                NotificationManager.IMPORTANCE_LOW);
+        channelsList.add(smartChargingModeAlert);
 
         final NotificationChannel newFeaturePrompt = new NotificationChannel(
                 ACCESSIBILITY_MAGNIFICATION,

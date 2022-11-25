@@ -150,6 +150,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
+import com.android.internal.notification.SystemNotificationChannels;
+
 /**
  * The power manager service is responsible for coordinating power management
  * functions on the device.
@@ -803,6 +805,10 @@ public final class PowerManagerService extends SystemService
         }
     }
 
+    // Smart charge
+      private boolean mSmartChargingNotifyEnabled;
+      private NotificationManager mNotificationManager;
+
     /**
      * All times are in milliseconds. These constants are kept synchronized with the system
      * global Settings. Any access to this class or its fields should be done while
@@ -1358,6 +1364,9 @@ public final class PowerManagerService extends SystemService
         resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.PROXIMITY_ON_WAKE),
                 false, mSettingsObserver, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.System.getUriFor(
+        	      Settings.System.SMART_CHARGING_NOTIFY),
+        		    false, mSettingsObserver, UserHandle.USER_ALL);
 
         IVrManager vrManager = IVrManager.Stub.asInterface(getBinderService(Context.VR_SERVICE));
         if (vrManager != null) {
@@ -1500,6 +1509,9 @@ public final class PowerManagerService extends SystemService
                 Settings.System.PROXIMITY_ON_WAKE,
                 mProximityWakeEnabledByDefaultConfig ? 1 : 0) == 1;
 
+        mSmartChargingNotifyEnabled = Settings.System.getInt(resolver,
+                Settings.System.SMART_CHARGING_NOTIFY, 0) == 1;
+
         mDirty |= DIRTY_SETTINGS;
     }
 
@@ -1508,6 +1520,7 @@ public final class PowerManagerService extends SystemService
     void handleSettingsChangedLocked() {
         updateSettingsLocked();
         updatePowerStateLocked();
+        updateSmartChargingNotify();
     }
 
     private void acquireWakeLockInternal(IBinder lock, int displayId, int flags, String tag,
@@ -2508,8 +2521,29 @@ public final class PowerManagerService extends SystemService
             }
 
             mBatterySaverStateMachine.setBatteryStatus(mIsPowered, mBatteryLevel, mBatteryLevelLow);
+            updateSmartChargingNotify();
         }
     }
+
+    privat void updateSmartChargingNotify() {
+
+      if (mIsPowered)) {
+        if (mBatteryLevel == 80 || mBatteryLevel == 85 || mBatteryLevel == 90 || mBatteryLevel = 95 || mBatteryLevel = 100 || mBatteryLevel = 75) {
+          mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+          Notification.Builder builder = new Notification.Builder(mContext, SystemNotificationChannels.SMART_CHARGE)
+		            .setTicker(mResources.getString(R.string.smart_charge_mode_notification_title))
+		            .setContentTitle(mResources.getString(R.string.smart_charge_mode_notification_title))
+		            .setContentText(mResources.getString(R.string.smart_charge_notification_content))
+		            //.setSmallIcon(R.drawable.ic_sleep)
+		            .setWhen(java.lang.System.currentTimeMillis())
+		            .setOngoing(true)
+	              .setAutoCancel(false);
+	        Notification notification = builder.build();
+		      mNotificationManager.notify(SLEEP_NOTIFICATION_ID, notification);
+          mNotificationManager = null;
+        }
+		  }
+		}
 
     @GuardedBy("mLock")
     private boolean shouldWakeUpWhenPluggedOrUnpluggedLocked(
