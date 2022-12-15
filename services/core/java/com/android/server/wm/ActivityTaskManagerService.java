@@ -5689,12 +5689,17 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                 if (!Build.isBuildConsistent()) {
                     Slog.e(TAG, "Build fingerprint is not consistent, warning user");
                     mUiHandler.post(() -> {
-                        if (mShowDialogs) {
+                        boolean mShowVendorMismatch = Resources.getSystem().getBoolean(
+                                R.bool.config_show_vendor_mismatch_message);
+                        if (mShowDialogs && mShowVendorMismatch) {
+                            String buildfingerprint = SystemProperties.get("ro.build.fingerprint");
+                            String[] splitfingerprint = buildfingerprint.split("/");
+                            String vendorid = splitfingerprint[3];
                             AlertDialog d = new BaseErrorDialog(mUiContext);
                             d.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ERROR);
                             d.setCancelable(false);
                             d.setTitle(mUiContext.getText(R.string.android_system_label));
-                            d.setMessage(mUiContext.getText(R.string.system_error_manufacturer));
+                            d.setMessage(mUiContext.getString(R.string.system_error_vendorprint, vendorid));
                             d.setButton(DialogInterface.BUTTON_POSITIVE,
                                     mUiContext.getText(R.string.ok),
                                     mUiHandler.obtainMessage(DISMISS_DIALOG_UI_MSG, d));
